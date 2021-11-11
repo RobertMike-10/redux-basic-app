@@ -1,7 +1,9 @@
+import  * as fromActions from './actions';
+
 export const initialState = {
   loaded: false,
   loading: false,
-  data: [{ lable: "Eat pizza", complete: false }],
+  data: [{ label: "Eat pizza", complete: false }],
 };
 
 export function reducer(
@@ -10,8 +12,11 @@ export function reducer(
 ) {
 
   switch(action.type){
-    case 'ADD_TODO':{
+    case fromActions.ADD_TODO:{
        return  addTodo(state,action);
+    }
+    case fromActions.REMOVE_TODO:{
+      return  removeTodo(state,action);
     }
   }
   return state;
@@ -21,4 +26,9 @@ function addTodo(state,action: { type: string; payload: any }){
   const todo = action.payload;
   const data = [...state.data, todo];
   return {...state, data:data};
+}
+
+function removeTodo(state,action: { type: string; payload: any }){
+  const data = state.data.filter(x=> x.label !== action.payload.label)
+  return {...state,data};
 }
