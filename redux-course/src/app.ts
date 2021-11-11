@@ -18,7 +18,7 @@ button.addEventListener(
     const payload = { label: input.value, complete: false };
 
     store.dispatch(new fromStore.AddTodo(payload));
-    console.log(store.value);
+
     input.value = "";
   },
   false
